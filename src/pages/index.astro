@@ -1,16 +1,50 @@
 ---
+import MainLayout from '../layouts/MainLayout.astro'
+import SearchForm from '../components/SearchForm.astro';
 
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content'; 
+import MostRecentArticle from '../components/MostRecentArticle.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { HOMEPAGE_ARTICLE_LIMIT } from '../constants';
+
+
+
+const allBlogArticles : CollectionEntry<'blog'>[] = (await getCollection('blog'))
+.sort((a:CollectionEntry<'blog'>,b: CollectionEntry<'blog'>)=>
+b.data.pubDate.valueOf() - a.data.pubDate.valueOf() 
+)
+
+const mostRecentArticle : CollectionEntry<'blog'> = allBlogArticles[0]
+
+const allOtherArticles : CollectionEntry<'blog'>[] = allBlogArticles.slice(1)
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout>
+
+
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div>
+          <h1 class="text-5xl font-bold mt-4 mb-8 leading-tight xl:text-5xl">
+            Δημιουργώντας χώρους διαβίωσης με φυτά εσωτερικού χώρου
+          </h1>
+          <h2 class="text-1xl mt-1 mb-8 leading-tight xl:text-2xl" >
+            Ανακαλύψτε τον ζωντανό κόσμο των φυτών εσωτερικού χώρου. Φέρτε τη φύση στο εσωτερικό και μεταμορφώστε το χώρο σας με πλούσια βλάστηση.
+          </h2>
+
+          <SearchForm />
+        </div>
+        <!-- Most Recent Article -->
+       <MostRecentArticle article={mostRecentArticle}/>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {allOtherArticles.slice(0,HOMEPAGE_ARTICLE_LIMIT).map(article=>(
+          <ArticleCard article={article}/>
+        ))}
+      </div>
+    </div>
+  </MainLayout>
+    
