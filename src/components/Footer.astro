@@ -9,18 +9,18 @@ const uniqueTags : string[]= [...new Set(allTags)]
 
 ---
 
-<footer class="bg-emerald-900 text-white">
+<footer class="bg-emerald-900 text-white pb-10">
     <div class="container mx-auto mt-10 max-w-screen-xl px-8">
       <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <div class="mt-10">
-          <h3 class="text-xl font-semibold mb-4">About</h3>
+          <h3 class="text-xl font-semibold mb-4">Σχετικά</h3>
           <p class="text-white text-sm">
            
 Το "Φυτά Εντός" είναι ένα blog για λάτρεις των φυτών εσωτερικού χώρου. Δημοσιεύουμε άρθρα, ιστορίες και οδηγούς για τις τελευταίες τάσεις και εξελίξεις στη φροντίδα φυτών.
           </p>
         </div>
         <div class="mt-10">
-          <h3 class="text-xl font-semibold mb-4">Categories</h3>
+          <h3 class="text-xl font-semibold mb-4">Κατηγορίες</h3>
           <ul class="text-white text-sm">
            {uniqueTags.map(tag=>(
             <li class="mb-2">
@@ -30,7 +30,7 @@ const uniqueTags : string[]= [...new Set(allTags)]
           </ul>
         </div>
         <div class="mt-10">
-          <h3 class="text-xl font-semibold mb-4">Contact</h3>
+          <h3 class="text-xl font-semibold mb-4">Επικοινωνία</h3>
           <ul class="text-white text-sm">
             <li class="mb-2">
               <a href="#">Email</a>

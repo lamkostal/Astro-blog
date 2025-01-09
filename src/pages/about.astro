@@ -1,20 +1,20 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro'
 import {Image} from "astro:assets"
-import about from "../images/about.jpg"
-import team1 from "../images/team1.png"
-import team2 from "../images/team2.png"
-import team3 from "../images/team3.png"
+import about from "../images/about-team.png"
+import member1 from "../images/m1.png"
+import member2 from "../images/m2.png"
+import member3 from "../images/m3.png"
 ---
 
 <MainLayout title="Σχετικά">
-    <h1 class="text-4xl font-bold mb-5">Σχετικά</h1>
+    <h1 class="text-4xl font-semibold mb-5">Σχετικά</h1>
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="w-full md:w-1/2 mb-8 md:mb-0">
             <Image src={about} alt="Tech People Team" class="w-full h-auto rounded-lg shadow-lg"/>
         </div>
         <div class="w-full md:w-1/2">
-            <h2 class="text-3xl font-extrabold text-gray-900 mb-4">
+            <h2 class="text-3xl font-semibold text-gray-900 mb-4">
                 Ποιοί είμαστε
             </h2>
             <p class="text-gray-700 leading-relaxed mb-6">
@@ -32,24 +32,24 @@ import team3 from "../images/team3.png"
      
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <Image src={team1} alt="Team Member 1" class="w-full h-auto"/>
+            <Image src={member1} alt="Team Member 1" class="w-full h-auto"/>
             <div class="p-6">
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">Γιώργος Παπαδόπουλος </h3>
                 <p class="text-gray-70">Founder & Editor-in-Chief</p>
             </div>
         </div>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <Image src={team2} alt="Team Member 2" class="w-full h-auto"/>    
+            <Image src={member2} alt="Team Member 2" class="w-full h-auto"/>    
                     <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">Νίκος Καραγιάννης</h3>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Chelsea Hoffman </h3>
                 <p class="text-gray-70">Lead Writer</p>
             </div>
         </div>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <Image src={team3} alt="Team Member 3" class="w-full h-auto"/>
+            <Image src={member3} alt="Team Member 3" class="w-full h-auto"/>
             <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">Ελένη Αντωνίου</h3>
-                <p class="text-gray-70">Tech Analyst</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Brielle Coleman</h3>
+                <p class="text-gray-70">Botanologist</p>
             </div>
         </div>
       </div>

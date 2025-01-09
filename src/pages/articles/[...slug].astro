@@ -1,5 +1,5 @@
 ---
-import MainLayout from "../../layouts/MainLayout.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
 // for SSR
 import { getEntry } from "astro:content";
 import { formatDate } from "../../utils";
@@ -40,7 +40,7 @@ const { Content } = await entry.render()
 
 ---
 
-<MainLayout title="Όλα τα φυτά">
+<ArticleLayout title="Όλα τα φυτά">
 
     <a href="/articles" class="inline-block bg-gray-100 p-2 mb-6 hover:bg-emerald-500 hover:text-white">Πίσω στα Άρθρα</a>
     <article>
@@ -54,12 +54,12 @@ const { Content } = await entry.render()
          ))}
       
       </div>
-      <Image src= {'/images/' + entry.data.image} alt="Article Image" class="lg:w-4/5 w-full  rounded-xl mb-6 aspect-video object-cover" width={1000} height={1000}/>
+      <Image src= {'/images/' + entry.data.image} alt="Article Image" class=" w-full rounded-xl mb-6 aspect-auto object-cover" width={1000} height={1000}/>
       <Content/>
 
     </article>
     
-</MainLayout>
+</ArticleLayout>
 
 <style is:global>
     p{
