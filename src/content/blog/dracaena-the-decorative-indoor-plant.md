@@ -1,6 +1,6 @@
 ---
 title: 'Δράκαινα - Dracaena'
-image: 'Dracaena Plant.jpg'
+image: 'Dracaena Plant.webp'
 pubDate: 2024-05-02
 tags: ['μεγάλο φυτό', 'τροπικά φυτά', 'εύκολη φροντίδα']
 slug: dracaena-the-decorative-indoor-plant

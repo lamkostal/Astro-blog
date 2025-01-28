@@ -1,6 +1,6 @@
 ---
 title: 'Φυτό αράχνης - Spider Plant'
-image: 'Spider-Plant.jpg'
+image: 'Spider-Plant.webp'
 pubDate: 2024-05-02
 tags: ['εύκολη φροντίδα', 'χαμηλή συντήρηση', 'τροπικά φυτά']
 slug: Spider-Plant

@@ -1,6 +1,6 @@
 ---
 title: 'Ορχιδέα - Orchid'
-image: 'orchid plant.jpg'
+image: 'orchid plant.webp'
 pubDate: 2024-12-22
 tags: ['λουλούδια', 'τροπικά φυτά', 'εύκολη φροντίδα']
 slug: Ορχιδέα-Orchid

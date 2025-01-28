@@ -1,6 +1,6 @@
 ---
 title: 'Σπαθίφυλλο - Peace Lily'
-image: 'Peace Lily.png'
+image: 'Peace Lily.webp'
 pubDate: 2024-05-02
 tags: ['εύκολη φροντίδα', 'λουλούδια', 'χαμηλή συντήρηση']
 slug: Σπαθίφυλλο-Peace-Lily

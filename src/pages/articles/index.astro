@@ -23,25 +23,27 @@ const articlesForPage : CollectionEntry<'blog'>[] = allBlogArticles.slice((curre
 
 <MainLayout>
   
- 
-    <h1 class="text-2xl pb-3 font-semibold ">Όλα τα φυτά</h1>
+ <section class="container mx-auto max-w-screen-xl mt-10 px-8">
    
-    <div class="relative w-1/2"><SearchForm/></div>
-    
-    <br>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Article Card -->
-      {articlesForPage.map(article=>(
-        <ArticleCard  article={article}/>
-      ))}
-    </div>
-
-      <!-- Pagination -->
-     <Pagination 
-     currentPage={currentPage}
-      totalPages={totalPages}
-      disablePrevious={currentPage===1}
-      disableNext={currentPage===totalPages}
-
-     />
+      <h1 class="text-2xl pb-3 font-semibold ">Όλα τα φυτά</h1>
+     
+      <div class="relative w-1/2"><SearchForm/></div>
+      
+      <br>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Article Card -->
+        {articlesForPage.map(article=>(
+          <ArticleCard  article={article}/>
+        ))}
+      </div>
+  
+        <!-- Pagination -->
+       <Pagination 
+       currentPage={currentPage}
+        totalPages={totalPages}
+        disablePrevious={currentPage===1}
+        disableNext={currentPage===totalPages}
+  
+       />
+ </section>
 </MainLayout>

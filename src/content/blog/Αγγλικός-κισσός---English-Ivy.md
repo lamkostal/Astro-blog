@@ -1,6 +1,6 @@
 ---
 title: 'Αγγλικός κισσός - English Ivy'
-image: 'english ivy.jpg'
+image: 'english ivy.webp'
 pubDate: 2024-05-02
 tags: ['εύκολη φροντίδα', 'χαμηλή συντήρηση', 'φυτά χαμηλού φωτός']
 slug: Αγγλικός-κισσός---English-Ivy

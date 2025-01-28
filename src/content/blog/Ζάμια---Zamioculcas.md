@@ -1,6 +1,6 @@
 ---
 title: 'Ζάμια - Zamioculcas'
-image: 'Zamia Plant.jpg'
+image: 'Zamia Plant.webp'
 pubDate: 2024-05-03
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
 slug: Ζάμια---Zamioculcas

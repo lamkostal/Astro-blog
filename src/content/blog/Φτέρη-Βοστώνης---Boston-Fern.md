@@ -1,6 +1,6 @@
 ---
 title: 'Φτέρη Βοστώνης - Boston Fern'
-image: 'Boston-Fern.jpg'
+image: 'Boston-Fern.webp'
 pubDate: 2024-05-12
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
 slug: Φτέρη-Βοστώνης---Boston-Fern

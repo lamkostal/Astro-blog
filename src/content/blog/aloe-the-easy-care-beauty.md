@@ -1,6 +1,6 @@
 ---
 title: 'Aloe Vera'
-image: 'Aloe Plant.jpg'
+image: 'Aloe Plant.webp'
 pubDate: 2024-12-02
 tags: ['εύκολη φροντίδα', 'χαμηλή συντήρηση', 'τροπικά φυτά']
 slug: aloe-the-easy-care-beauty

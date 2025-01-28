@@ -1,6 +1,6 @@
 ---
 title: 'Σανσιβιέρια - Snake Plant'
-image: 'Snake Plant.png'
+image: 'Snake Plant.webp'
 pubDate: 2024-05-02
 tags: ['εύκολη φροντίδα', 'χαμηλή συντήρηση', 'φυτά χαμηλού φωτός']
 slug: Snake-Plant

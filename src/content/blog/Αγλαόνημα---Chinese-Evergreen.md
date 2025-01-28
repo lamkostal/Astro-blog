@@ -1,6 +1,6 @@
 ---
 title: 'Αγλαόνημα - Chinese Evergreen'
-image: 'Aglaonema plant.jpg'
+image: 'Aglaonema plant.webp'
 pubDate: 2024-05-02
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
 slug: Αγλαόνημα---Chinese-Evergreen

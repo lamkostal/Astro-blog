@@ -1,6 +1,6 @@
 ---
 title: 'Φιλόδενδρο - Philodendron'
-image: 'Philodendron-plant.jpg'
+image: 'Philodendron-plant.webp'
 pubDate: 2024-05-02
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
 slug: Φιλόδενδρο---Philodendron
