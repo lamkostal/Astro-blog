@@ -1,7 +1,7 @@
 ---
 title: 'Πεπερόμια - Peperomia'
 image: 'Peperomia plant.webp'
-pubDate: 2024-05-02
+pubDate: 2024-06-22
 tags: ['εύκολη φροντίδα', 'χαμηλή συντήρηση', 'φυτά χαμηλού φωτός']
 slug: Πεπερόμια-Peperomia
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'Χόγια - Hoya'
 image: 'Hoya.webp'
-pubDate: 2024-05-02
+pubDate: 2024-10-02
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'λουλούδια']
 slug: Χόγια---Hoya
 ---

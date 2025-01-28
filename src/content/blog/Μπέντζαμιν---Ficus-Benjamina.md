@@ -1,7 +1,7 @@
 ---
 title: 'Φίκος Μπέντζαμιν'
 image: 'Ficus Benjamina.webp'
-pubDate: 2024-05-02
+pubDate: 2024-05-05
 tags: ['μεγάλο φυτό', 'εύκολη φροντίδα', 'τροπικά φυτά']
 slug: Μπέντζαμιν---Ficus-Benjamina
 ---

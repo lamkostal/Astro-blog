@@ -24,10 +24,10 @@ const allOtherArticles : CollectionEntry<'blog'>[] = allBlogArticles.slice(1)
 
 
       <!-- Top Grid -->
-      <div class="grid grid-cols-1  lg:grid-cols-2 bg-[url(/public/images/bgHero.webp)] bg-cover bg-left
- min-h-80" >
-        <div class="p-12 text-white bg-gray-500 bg-opacity-25 backdrop-blur-sm md:backdrop-blur-sm ">
-          <h1 class="text-3xl font-bold  mb-8 leading-tight xl:text-5xl">
+      <div class="grid grid-cols-1  lg:grid-cols-2 bg-[url(/public/images/bgCandidate5.webp)] bg-cover bg-left
+ min-h-[35rem]" >
+        <div class="px-8 md:px-16 pt-20 text-white bg-gray-500 bg-opacity-25 backdrop-blur-sm md:backdrop-blur-sm ">
+          <h1 class="text-2xl font-bold  mb-8 leading-tight xl:text-4xl">
             Δημιουργώντας χώρους διαβίωσης με φυτά εσωτερικού χώρου
           </h1>
           <h2 class="text-1xl mt-1 mb-8 leading-tight xl:text-2xl" >
@@ -41,7 +41,7 @@ const allOtherArticles : CollectionEntry<'blog'>[] = allBlogArticles.slice(1)
       </div>
 
       <!-- Main Grid -->
-      <div class="container mx-auto max-w-screen-xl mt-10 px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="container mx-auto max-w-screen-xl mt-4 px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {allOtherArticles.slice(0,HOMEPAGE_ARTICLE_LIMIT).map(article=>(
           <ArticleCard article={article}/>
         ))}

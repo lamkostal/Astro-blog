@@ -1,7 +1,7 @@
 ---
 title: 'Ευφόρμπια - Crown of Thorns'
 image: 'Crown of Thorns.webp'
-pubDate: 2024-05-02
+pubDate: 2024-12-02
 tags: ['μεγάλο φυτό', 'εύκολη φροντίδα', 'λουλούδια']
 slug: Ευφόρμπια---Crown-of-Thorns
 ---

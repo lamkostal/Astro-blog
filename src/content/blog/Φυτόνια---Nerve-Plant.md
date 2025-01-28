@@ -1,7 +1,7 @@
 ---
 title: 'Φυτόνια - Nerve Plant'
 image: 'fytonia.webp'
-pubDate: 2024-05-02
+pubDate: 2024-05-12
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
 slug: Φυτόνια---Nerve-Plant
 ---

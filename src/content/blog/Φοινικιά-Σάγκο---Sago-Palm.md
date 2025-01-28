@@ -2,7 +2,7 @@
 
 title: 'Φοινικιά Σάγκο - Sago Palm'
 image: 'sango.webp'
-pubDate: 2024-05-02
+pubDate: 2024-01-22
 tags: ['μεγάλο φυτό', 'τροπικά φυτά', 'χαμηλή συντήρηση']
 slug: Φοινικιά-Σάγκο---Sago-Palm
 ---

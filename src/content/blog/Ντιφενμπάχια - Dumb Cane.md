@@ -1,7 +1,7 @@
 ---
 title: 'Ντιφενμπάχια - Dumb Cane'
 image: 'Dieffenbachia.webp'
-pubDate: 2024-05-02
+pubDate: 2024-11-14
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
 slug: Ντιφενμπάχια - Dumb Cane
 ---

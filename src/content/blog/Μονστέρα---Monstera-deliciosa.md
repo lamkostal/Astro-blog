@@ -1,7 +1,7 @@
 ---
 title: 'Μονστέρα - Monstera deliciosa'
 image: 'Monstera Plant.webp'
-pubDate: 2024-05-02
+pubDate: 2024-11-02
 tags: ['μεγάλο φυτό', 'τροπικά φυτά', 'εύκολη φροντίδα']
 slug: Μονστέρα---Monstera-deliciosa
 ---

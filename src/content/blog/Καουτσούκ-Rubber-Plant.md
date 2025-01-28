@@ -1,7 +1,7 @@
 ---
 title: 'Καουτσούκ - Rubber Plant'
 image: 'Rubber Plant.webp'
-pubDate: 2024-05-02
+pubDate: 2024-07-03
 tags: ['μεγάλο φυτό', 'τροπικά φυτά', 'εύκολη φροντίδα']
 slug: Καουτσούκ-Rubber-Plant
 ---

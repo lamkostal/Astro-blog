@@ -1,7 +1,7 @@
 ---
 title: 'Φίκος Λυράτα - Fiddle Leaf Fig'
 image: 'lyrata.webp'
-pubDate: 2024-05-02
+pubDate: 2024-08-14
 tags: ['μεγάλο φυτό', 'τροπικά φυτά', 'εύκολη φροντίδα']
 slug: Φίκος-Λυράτα---Fiddle-Leaf-Fig
 ---

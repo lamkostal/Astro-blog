@@ -1,7 +1,7 @@
 ---
 title: 'Καλαθέα - Calathea'
 image: 'Καλαθέα - Calathea.webp'
-pubDate: 2024-05-02
+pubDate: 2024-09-02
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
 slug: Καλαθέα---Calathea
 ---

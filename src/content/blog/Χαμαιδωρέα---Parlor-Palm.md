@@ -1,7 +1,7 @@
 ---
 title: 'Χαμαιδωρέα - Parlor Palm'
 image: 'Χαμαιδωρέα - Parlor Palm.webp'
-pubDate: 2024-05-02
+pubDate: 2024-10-05
 tags: ['μεγάλο φυτό', 'εύκολη φροντίδα', 'φυτά χαμηλού φωτός']
 slug: Χαμαιδωρέα---Parlor-Palm
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'Μπεγόνια - Begonia'
 image: 'Begonia.webp'
-pubDate: 2024-05-02
+pubDate: 2024-05-20
 tags: ['τροπικά φυτά', 'εύκολη φροντίδα', 'λουλούδια']
 slug: Μπεγόνια---Begonia
 ---

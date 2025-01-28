@@ -1,7 +1,7 @@
 ---
 title: 'Πόθος - Pothos'
 image: 'Pothos Plant.png'
-pubDate: 2024-05-02
+pubDate: 2024-05-07
 tags: ['εύκολη φροντίδα', 'χαμηλή συντήρηση', 'φυτά χαμηλού φωτός']
 slug: Πόθος-Pothos
 ---
