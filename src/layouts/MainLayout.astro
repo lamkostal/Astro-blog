@@ -2,6 +2,8 @@
 import Navbar from "../components/Navbar.astro"
 import Footer from "../components/Footer.astro"
 import {SITE_TITLE, SITE_DESCRIPTION} from "../constants"
+import PostHog from '../components/posthog.astro'
+import Posthog from "../components/posthog.astro"
 
 const { title = 'Φυτά Εντός'} = Astro.props
 
@@ -14,6 +16,7 @@ interface Props {
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={SITE_DESCRIPTION}>
@@ -29,7 +32,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palet
 
 <!-- End Cookie Consent by TermsFeed https://www.TermsFeed.com -->
 
-
+<Posthog/>
 
 
 
