@@ -1,6 +1,8 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro'
-import SearchForm from '../components/SearchForm.astro';
+import PostHogLayout from '../layouts/PostHogLayout.astro';
+
+import SearchForm from '../components/SearchForm.astro'
 
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content'; 
@@ -19,7 +21,7 @@ b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 
 
 ---
-
+<PostHogLayout>
 <MainLayout>
 
 
@@ -50,6 +52,7 @@ b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
     </div>
     <div class="container max-w-screen-xl mx-auto mt-10 px-8"><a href="/articles" class="inline-block bg-gray-100 p-2 mb-6 hover:bg-emerald-500 hover:text-white">Όλα τα Άρθρα..</a></div>
   </MainLayout>
+</PostHogLayout>
     <script>
       import {gsap} from "gsap";
 
