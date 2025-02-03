@@ -2,7 +2,7 @@
 title: 'Αφρικανική βιολέτα - African Violet'
 image: 'african violet.webp'
 pubDate: 2024-05-22
-tags: ['λουλούδια', 'εύκολη φροντίδα', 'χαμηλή συντήρηση']
+tags: ['λουλούδια', 'εύκολη φροντίδα', ]
 slug: Αφρικανική-βιολέτα---African-Violet
 ---
 
