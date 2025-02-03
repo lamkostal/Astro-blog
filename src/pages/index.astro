@@ -4,7 +4,7 @@ import SearchForm from '../components/SearchForm.astro';
 
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content'; 
-import MostRecentArticle from '../components/MostRecentArticle.astro';
+
 import ArticleCard from '../components/ArticleCard.astro';
 import { HOMEPAGE_ARTICLE_LIMIT } from '../constants';
 
@@ -15,7 +15,7 @@ const allBlogArticles : CollectionEntry<'blog'>[] = (await getCollection('blog')
 b.data.pubDate.valueOf() - a.data.pubDate.valueOf() 
 )
 
-const mostRecentArticle : CollectionEntry<'blog'> = allBlogArticles[0]
+
 
 const allOtherArticles : CollectionEntry<'blog'>[] = allBlogArticles.slice(1)
 ---
@@ -36,17 +36,19 @@ const allOtherArticles : CollectionEntry<'blog'>[] = allBlogArticles.slice(1)
 
           <SearchForm />
         </div>
-        <!-- Most Recent Article -->
-       <!-- <MostRecentArticle article={mostRecentArticle}/> -->
+      
       </div>
 
       <!-- Main Grid -->
-      <div class="container mx-auto max-w-screen-xl mt-4 px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <h2 class="container max-w-screen-xl mx-auto mt-10 px-8 font-semibold xl:text-2xl">Πιο πρόσφατα άρθρα</h2>
+      <div class="container mx-auto max-w-screen-xl  px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+       
         {allOtherArticles.slice(0,HOMEPAGE_ARTICLE_LIMIT).map(article=>(
           <ArticleCard article={article}/>
         ))}
       </div>
     </div>
+    <div class="container max-w-screen-xl mx-auto mt-10 px-8"><a href="/articles" class="inline-block bg-gray-100 p-2 mb-6 hover:bg-emerald-500 hover:text-white">Όλα τα Άρθρα..</a></div>
   </MainLayout>
     <script>
       import {gsap} from "gsap";
