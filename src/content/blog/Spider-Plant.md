@@ -2,7 +2,7 @@
 title: 'Φυτό αράχνης - Spider Plant'
 image: 'Spider-Plant.webp'
 pubDate: 2024-05-06
-tags: ['εύκολη φροντίδα',  'τροπικά φυτά']
+tags: ['εύκολη φροντίδα',  'τροπικά φυτά','air purifier']
 slug: Spider-Plant
 ---
 

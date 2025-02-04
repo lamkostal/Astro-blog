@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import SearchForm from "../../components/SearchForm.astro";
 // for SSR
 import { getEntry } from "astro:content";
 import { formatDate } from "../../utils";
@@ -58,6 +59,12 @@ const { Content } = await entry.render()
       <Content/>
 
     </article>
+    <div class="mt-12 max-w-fit">
+        <p class="text-xl">Ψαχνεις κατι αλλο;</p>
+        <SearchForm />
+    </div>
+    
+
     
 </ArticleLayout>
 

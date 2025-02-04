@@ -7,11 +7,14 @@ const allBlogArticles : CollectionEntry<'blog'>[] =await getCollection('blog');
 const allTags : string[] = allBlogArticles.flatMap((article:any) => article.data.tags)
 const uniqueTags : string[]= [...new Set(allTags)]
 
+const year = new Date().getFullYear();
+
 ---
 
-<footer class="bg-emerald-900 text-white pb-10">
+
+<footer class="bg-emerald-800 text-white pb-10">
     <div class="container mx-auto mt-10 max-w-screen-xl px-8">
-      <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid grid-cols-1 gap-2 md:gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <div class="mt-4 md:mt-10">
           <h3 class="text-xl font-semibold mb-4">Σχετικά</h3>
           <p class="text-white text-sm">
@@ -45,8 +48,9 @@ const uniqueTags : string[]= [...new Set(allTags)]
               <a href="#">Instagram</a>
             </li>
             <li>
-              <a href="#" id="open_preferences_center">Update cookies preferences</a>
+              
             </li>
           </ul>
-          
+    
   </footer>
+  <div class="flex justify-between bg-emerald-900 px-4 py-2 text-gray-400 text-xs"><span>Created by KD </span><span>copyright © {year}</span><span><a href="#" id="open_preferences_center">Update Cookies Preferences</a></span></div>
