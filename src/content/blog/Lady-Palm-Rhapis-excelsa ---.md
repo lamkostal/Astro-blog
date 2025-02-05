@@ -2,7 +2,7 @@
 title: 'Ραφίς - Lady Palm'
 image: 'lady palm.webp'
 pubDate: 2025-02-03
-tags: ['φυτά χαμηλού φωτός', 'εύκολη φροντίδα', 'τροπικά φυτά']
+tags: ['χαμηλού φωτισμού', 'εύκολη φροντίδα', 'τροπικά φυτά']
 slug: Lady-Palm-Rhapis-excelsa
 ---
 

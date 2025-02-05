@@ -2,7 +2,7 @@
 title: 'Αγγλικός κισσός - English Ivy'
 image: 'english ivy.webp'
 pubDate: 2024-05-12
-tags: ['εύκολη φροντίδα',  'φυτά χαμηλού φωτός','air purifier']
+tags: ['εύκολη φροντίδα',  'χαμηλού φωτισμού','air purifier']
 slug: Αγγλικός-κισσός---English-Ivy
 ---
 

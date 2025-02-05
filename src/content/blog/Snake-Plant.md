@@ -2,7 +2,7 @@
 title: 'Σανσιβιέρια - Snake Plant'
 image: 'Snake Plant.webp'
 pubDate: 2024-05-05
-tags: ['εύκολη φροντίδα', 'φυτά χαμηλού φωτός','air purifier']
+tags: ['εύκολη φροντίδα', 'χαμηλού φωτισμού','air purifier']
 slug: Snake-Plant
 ---
 

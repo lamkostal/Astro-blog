@@ -2,7 +2,7 @@
 title: 'Κινέζικη φυλλοβόλος - Chinese Money Plant'
 image: 'chinese money plant.webp'
 pubDate: 2025-02-03
-tags: ['εύκολη φροντίδα', 'φυτά χαμηλού φωτός']
+tags: ['εύκολη φροντίδα', 'χαμηλού φωτισμού']
 slug: Κινέζικη-φυλλοβόλος-Chinese-Money-Plant-Pilea-peperomioides
 ---
 
