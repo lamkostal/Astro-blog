@@ -25,6 +25,9 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     freq:'',
     plants:[],
     today:new Date,
+    get dryPlants(){
+        return this.plants.filter((plant)=>plant.isDry==true)
+    },
     get formatDate(){
         return new Date(this.date.split('/').reverse().join('/')).toDateString()
     },
@@ -68,6 +71,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
 
     },
     loadData(){
+    console.log(this.dryPlants)
         if(localStorage.getItem('plants')){
          this.plants = JSON.parse(localStorage.getItem('plants'))
         }
@@ -184,13 +188,16 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
             </form>
             <!-- list of plants -->
 
-            <ul class="py-8 w-full mx-auto">
-                <h2
-                    x-show="plants.length > 0"
-                    class="text-center text-xl font-medium pb-4"
-                >
-                    Τα Φυτά Μου
-                </h2>
+            <ul class="py-8 w-full mx-auto capitalize">
+                <div class="flex justify-between items-center">
+                    <h2
+                        x-show="plants.length > 0"
+                        class="text-center text-xl font-medium pb-4"
+                    >
+                        Τα Φυτά Μου 
+                    </h2>
+                    <span x-show="dryPlants.length > 0" class="pb-4 text-sm">Χρειάζονται πότισμα ( <span x-text="dryPlants.length"></span> )</span>
+                </div>
                 <template x-for="(plant,index) in plants" key="index">
                     <li
                         class="grid auto-rows-max md:grid-cols-5 gap-2 md:grid-rows-1 grid-cols-1 grid-rows-2 place-items-center gap-2 border-2 rounded-lg mb-4 p-2"
