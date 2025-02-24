@@ -68,7 +68,9 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
 
     },
     loadData(){
-           this.plants = JSON.parse(localStorage.getItem('plants'))
+        if(localStorage.getItem('plants')){
+         this.plants = JSON.parse(localStorage.getItem('plants'))
+        }
           if(localStorage.getItem('modalIsOff')){
           this.neverShowModal = JSON.parse(localStorage.getItem('modalIsOff'))
           }
