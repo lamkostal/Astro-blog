@@ -1,0 +1,437 @@
+---
+//@ts-nocheck
+import MainLayout from "../layouts/MainLayout.astro";
+import SearchForm from "../components/SearchForm.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import ArticleCard from "../components/ArticleCard.astro";
+import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
+---
+
+<script is:inline defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<MainLayout>
+    <section
+      x-init="$nextTick(()=> loadData())"
+        class="container mx-auto max-w-screen-xl mt-10 px-3 md:px-8"
+        x-data=" { 
+    hideModal:true,
+    neverShowModal:false,
+    isDry:true,
+    title:'',
+    date:'',
+    days:undefined,
+    freq:'',
+    plants:[],
+    today:new Date,
+    get formatDate(){
+        return new Date(this.date.split('/').reverse().join('/')).toDateString()
+    },
+    itemdateDiff(index){
+         const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+         const dateobject= new Date(this.plants[index].date)
+         const utc1 = Date.UTC(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+         const utc2 = Date.UTC(dateobject.getFullYear(), dateobject.getMonth(), dateobject.getDate());
+         this.plants[index].days = Math.floor((utc1 - utc2) / _MS_PER_DAY);
+         this.checkIsDry(index)
+    },
+    addItems(){
+             if( this.title !=='' && this.date !== '' ){
+             this.hideModal=false
+             this.plants.push({title:this.title, date:this.formatDate, days:this.days, freq:this.freq, isDry:this.isDry})
+             this.title =''
+             this.date = null
+             }  
+             else {alert('please fill both fields')}   
+             }, 
+    removeItem(index){
+             this.plants.splice(index,1)
+    },
+    wateredToday(index){
+            this.plants[index].date = this.today.toDateString()
+            this.itemdateDiff(index)       
+    },
+    checkIsDry(index){
+        if(this.plants[index].freq && this.plants[index].days >= this.plants[index].freq || this.plants[index].freq==='' ){
+            this.plants[index].isDry = true
+           
+        } else { this.plants[index].isDry = false}
+    },
+  
+    saveData(){
+          localStorage.setItem('plants',JSON.stringify(this.plants))
+    },
+    saveModalState(){
+    this.neverShowModal= true
+          localStorage.setItem('modalIsOff',JSON.stringify(this.neverShowModal))  
+
+    },
+    loadData(){
+           this.plants = JSON.parse(localStorage.getItem('plants'))
+          if(localStorage.getItem('modalIsOff')){
+          this.neverShowModal = JSON.parse(localStorage.getItem('modalIsOff'))
+          }
+          
+    },
+    modalIsShown(){
+      if(this.hideModal === false && this.neverShowModal === false){
+      return true
+      }
+    }
+     }"
+    >
+     <!-- form and and added plants layout -->
+
+        <div
+          
+            class="mx-auto max-w-screen-md min-h-screen flex flex-col items-center text-gray-900"
+            x-init="$watch('plants',()=>{saveData()})"
+        >
+            <header class="pb-4 text-center border-b border-gray-200">
+                <h1 class="text-2xl font-bold pb-2 capitalize">
+                    Ημερολόγιο ποτίσματος
+                </h1>
+                <p>
+                    Προγραμμάτισε το πότισμα των φυτών σου! Πρόσθεσε τα φυτά σου
+                    και την συχνότητα που θέλεις να ποτίζεις. Ο προγραμματιστής
+                    ποτίσματος θα σε ενημερώνει για την κατάσταση των φυτών σου.
+                </p>
+            </header>
+            <form class="w-full flex items-end justify-center gap-4 pt-6">
+                <!-- name field -->
+                <div title="Πρόσθεσε όνομα φυτού">
+                    <label
+                        for="title"
+                        class="text-center block mb-2 text-sm font-medium text-gray-900"
+                        >Όνομα Φυτού</label
+                    >
+                    <input
+                        x-model="title"
+                        type="text"
+                        id="title"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+                        placeholder="Προσθήκη Φυτού..."
+                        required
+                    />
+                </div>
+
+                <!-- datepicker -->
+                <div class="flex flex-col" title="Πρόσθεσε ημ/νια">
+                    <label
+                        class="text-center block mb-2 text-sm font-medium text-gray-900"
+                        >Τελευταίο Πότισμα</label
+                    >
+                    <div class="relative max-w-sm">
+                        <div
+                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                        >
+                            <svg
+                                class="w-3 h-3 text-gray-500 dark:text-gray-400"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <!-- hack with @blur to trigger the even -->
+                        <input
+                            x-model="date"
+                            @blur="$event.target.dispatchEvent(new Event('input'))"
+                            type="text"
+                            datepicker-buttons
+                            datepicker
+                            id="datepicker-actions"
+                            datepicker-format="dd/mm/yyyy"
+                            datepicker-max-date="today"
+                            datepicker-autoselect-today
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full ps-10 p-2.5"
+                            placeholder="Ημ/νια"
+                        />
+                    </div>
+                </div>
+
+                <button
+                    title="Πρόσθεσε φυτό"
+                    type="submit"
+                    @click.prevent="addItems"
+                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 text-lg font-bold rounded-lg px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                    <svg
+                        class="w-6 h-6 text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="3"
+                            d="M5 12h14m-7 7V5"></path>
+                    </svg>
+                </button>
+            </form>
+            <!-- list of plants -->
+
+            <ul class="py-8 w-full mx-auto">
+                <h2
+                    x-show="plants.length > 0"
+                    class="text-center text-xl font-medium pb-4"
+                >
+                    Τα Φυτά Μου
+                </h2>
+                <template x-for="(plant,index) in plants" key="index">
+                    <li
+                        class="grid auto-rows-max md:grid-cols-5 gap-2 md:grid-rows-1 grid-cols-1 grid-rows-2 place-items-center gap-2 border-2 rounded-lg mb-4 p-2"
+                        x-init="$nextTick(()=>{
+                        itemdateDiff(index)
+                        })"
+                    >
+                        <!-- title -->
+                        <div
+                            class="md:justify-self-start w-full flex items-center gap-2"
+
+                        >
+                       
+                        
+                            <template x-if="!plant.isDry">
+                                
+                                <svg
+                                    
+                                    class="w-7 h-7 text-gray-800 shrink-0"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    fill="green"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </template>
+                            <template x-if="plant.isDry">
+                                <svg
+                                  
+                                    class="w-7 h-7 text-gray-800 shrink-0"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    fill="red"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </template>
+                            <span
+                                class="text-md font-bold capitalize break-all"
+                                x-text="plant.title"></span>
+                        </div>
+
+                        <!-- water freq -->
+                        <div class="w-full flex flex-col items-center relative">
+                            <div class="absolute bottom-2 right-0">
+                                <template x-if="plant.freq ==='' ">
+                                    <svg
+                                        class="w-5 h-5 text-gray-800"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        fill="red"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </template>
+                            </div>
+                            <p
+                                id="helper-text-explanation"
+                                class="mb-1 text-sm text-center"
+                            >
+                                ποτίσμα κάθε:
+                            </p>
+                            <div class="w-2/3">
+                                <input
+                                    @input.debounce="checkIsDry(index)"
+                                    x-model="plant.freq"
+                                    aria-describedby="helper-text-explanation"
+                                    class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full text-center p-2 mx-auto"
+                                    placeholder="ημέρες"
+                                    type="number"
+                                    min="1"
+                                />
+                            </div>
+                        </div>
+                        <!-- watered today -->
+                        <button
+                            @click="wateredToday(index)"
+                            type="button"
+                            class="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"
+                        >
+                            <span class="px-2">Πότισα!</span>
+                            <svg
+                                class="w-4 h-4"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 18 18"
+                            >
+                                <path
+                                    d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z"
+                                ></path>
+                            </svg>
+                            <span class="sr-only">Πότισα!</span>
+                        </button>
+                        <!-- last watered -->
+                        <div class="flex flex-col items-center text-center">
+                            <span class="text-sm"
+                                >τελευταίο πότισμα
+                                <template x-if="plant.days > 0 ">
+                                    <span
+                                        class="font-bold"
+                                        :class="plant.isDry ? 'text-red-500' : 'text-green-500'"
+                                        x-text="' πριν: '+ plant.days+ ' ημέρες'"
+                                    ></span>
+                                </template>
+                                <template x-if="plant.days===0">
+                                    <span
+                                        class="font-bold"
+                                        :class="plant.isDry ? 'text-red-500' : 'text-green-500'"
+                                        >Σήμερα</span
+                                    >
+                                </template>
+                            </span>
+                            <span
+                                class="text-sm text-gray-400 mt-1"
+                                x-text="plant.date"></span>
+                        </div>
+
+                        <!-- remove button -->
+                        <button
+                            @click="removeItem(index)"
+                            type="button"
+                            class="justify-self-end text-green-700 border border-green-700 hover:bg-red-700 hover:text-white hover:border-red-700 focus:outline-none rounded-full text-sm p-2 text-center inline-flex items-center"
+                        >
+                            <svg
+                                class="w-4 h-4 dark:text-white"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+                                ></path>
+                            </svg>
+
+                            <span class="sr-only">διαγραφή!</span>
+                        </button>
+                    </li>
+                </template>
+            </ul>
+        </div>
+        <!-- Small Modal -->
+        <template x-if="true">
+            <div
+            x-cloak
+                x-show="modalIsShown"
+                x-transition
+                tabindex="-1"
+                class="fixed flex justify-center items-center top-0 left-0 right-0 z-50 bg-gray-700 bg-opacity-40 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+            >
+                <div class="relative w-full max-w-md max-h-full">
+                    <!-- Modal content -->
+                    <div
+                        class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700"
+                    >
+                        <!-- Modal header -->
+                        <div
+                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200"
+                        >
+                            <h3
+                                class="text-xl font-medium text-gray-900 dark:text-white"
+                            >
+                                Ενημέρωση
+                            </h3>
+                            <button
+                             @click="hideModal = true"
+                                type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                                <svg
+                                    class="w-3 h-3"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 14 14"
+                                >
+                                    <path
+                                        stroke="currentColor"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                                    ></path>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-4 md:p-5 space-y-4">
+                            <p
+                                class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+                            >
+                                Σημαντική πληροφορία!
+                            </p>
+                            <p
+                                class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+                            >
+                                Η λιστα με τα φυτά δεν αποθηκεύεται σε κάποια
+                                εξωτερική βάση δεδομένων παρα μόνο στην τοπική μνήμη
+                                του περιηγητή που χρησημοποιείτε. Ως εκ τούτου η
+                                διάγραφή των δεδομένων περιήγησης από το ιστορικό
+                                για τον ιστότοπο μας θα προκαλέσει απώλεια των
+                                αποθηκευμένων φυτών.
+                            </p>
+                        </div>
+                        <!-- Modal footer -->
+                        <div
+                            class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+                        >
+                            <button
+                                @click="saveModalState"
+                                type="button"
+                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                                >Do not show this again</button
+                            >
+                        </div>
+                    </div>
+                </div>
+        </template>
+        </div>
+    </section>
+</MainLayout>
+

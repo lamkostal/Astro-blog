@@ -5,7 +5,6 @@ import logo from '../images/logo-plants.png';
 <script>
   import { gsap } from "gsap";
 const navbtn = document.querySelectorAll(".navbtn");
-console.log(navbtn)
 const tl = gsap.timeline();
 tl
 .from(navbtn, {
@@ -73,7 +72,14 @@ tl
             <a
               href="/articles"
               class="block py-2 px-3 text-white rounded md:p-0 hover:text-emerald-400 navbtn"
-              >Όλα τα φυτά</a
+              >Άρθρα</a
+            >
+          </li>
+          <li>
+            <a
+              href="/watering"
+              class="block py-2 px-3 text-white rounded md:p-0 hover:text-emerald-400 navbtn"
+              >Πότισμα</a
             >
           </li>
           <li>
