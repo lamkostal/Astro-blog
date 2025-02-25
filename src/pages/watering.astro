@@ -8,12 +8,14 @@ import ArticleCard from "../components/ArticleCard.astro";
 import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
 ---
 
-
-<script is:inline  src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" defer></script>
+<script
+    is:inline
+    src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
+    defer></script>
 
 <MainLayout>
     <section
-      x-init="$nextTick(()=> loadData())"
+        x-init="$nextTick(()=> loadData())"
         class="container mx-auto max-w-screen-xl mt-10 px-3 md:px-8"
         x-data=" { 
     hideModal:true,
@@ -87,15 +89,14 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     }
      }"
     >
-     <!-- form and and added plants layout -->
+        <!-- form and and added plants layout -->
 
         <div
-          
             class="mx-auto max-w-screen-md min-h-screen flex flex-col items-center text-gray-900"
             x-init="$watch('plants',()=>{saveData()})"
         >
-            <header class="pb-4 text-center border-b border-gray-200">
-                <h1 class="text-2xl font-bold pb-2 capitalize">
+            <header class="pb-4 text-center border-b border-gray-200 md:mb-4">
+                <h1 class="text-2xl font-bold pb-2 capitalize ">
                     Ημερολόγιο ποτίσματος
                 </h1>
                 <p>
@@ -104,12 +105,14 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                     ποτίσματος θα σε ενημερώνει για την κατάσταση των φυτών σου.
                 </p>
             </header>
-            <form class="w-full flex flex-col md:flex md:flex-row md:items-end md:justify-center gap-4 pt-6">
+            <form
+                class="w-full flex flex-col md:flex md:flex-row md:items-end md:justify-center gap-3 md:gap-6 pt-6 md:mb-4"
+            >
                 <!-- name field -->
                 <div title="Πρόσθεσε όνομα φυτού">
                     <label
                         for="title"
-                        class="text-center block mb-1 md:mb-2 text-sm font-medium text-gray-900"
+                        class=" block mb-1 md:mb-2 text-sm font-medium text-gray-900"
                         >Όνομα Φυτού</label
                     >
                     <input
@@ -122,10 +125,10 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                     />
                 </div>
 
-             <!-- datepicker -->
+                <!-- datepicker -->
                 <div class="" title="Πρόσθεσε ημ/νια">
                     <label
-                        class="text-center block mb-1 md:mb-2 text-sm font-medium text-gray-900"
+                        class="block mb-1 md:mb-2 text-sm font-medium text-gray-900"
                         >Τελευταίο Πότισμα</label
                     >
                     <div class="relative max-w-sm">
@@ -166,7 +169,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                     title="Πρόσθεσε φυτό"
                     type="submit"
                     @click.prevent="addItems"
-                    class=" focus:outline-none text-white bg-green-700 hover:bg-green-800 text-lg font-bold rounded-lg px-5 py-2.5 flex justify-center"
+                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 text-lg font-bold rounded-lg px-5 py-2.5 flex justify-center"
                 >
                     <svg
                         class="w-6 h-6 text-white"
@@ -189,18 +192,21 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
             <!-- list of plants -->
 
             <ul class="py-8 w-full mx-auto capitalize">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center mb-5">
                     <h2
                         x-show="plants.length > 0"
-                        class="text-center text-xl font-medium pb-4"
+                        class="text-center text-2xl  pl-4 border-l-2"
                     >
-                        Τα Φυτά Μου 
+                        Τα Φυτά Μου
                     </h2>
-                    <span x-show="dryPlants.length > 0" class="pb-4 text-sm">Χρειάζονται πότισμα ( <span x-text="dryPlants.length"></span> )</span>
+                    <span x-show="dryPlants.length > 0" class="text-red-600 text-sm"
+                        > ( <span x-text="dryPlants.length"
+                        ></span> ) Χρειάζονται πότισμα!</span
+                    >
                 </div>
                 <template x-for="(plant,index) in plants" key="index">
                     <li
-                        class="grid auto-rows-max md:grid-cols-5 gap-2 md:grid-rows-1 grid-cols-1 grid-rows-2 place-items-center gap-2 border-2 rounded-lg mb-4 p-2"
+                        class="grid auto-rows-max md:grid-cols-5 gap-2 md:grid-rows-1 grid-cols-1 grid-rows-2 place-items-center gap-2 border-2 rounded-lg mb-3 md:mb-5 p-2 md:p-4"
                         x-init="$nextTick(()=>{
                         itemdateDiff(index)
                         })"
@@ -208,14 +214,9 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                         <!-- title -->
                         <div
                             class="w-full flex justify-center md:justify-start items-center gap-2"
-
                         >
-                       
-                        
                             <template x-if="!plant.isDry">
-                                
                                 <svg
-                                    
                                     class="w-7 h-7 text-gray-800 shrink-0"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -232,7 +233,6 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                             </template>
                             <template x-if="plant.isDry">
                                 <svg
-                                  
                                     class="w-7 h-7 text-gray-800 shrink-0"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -341,7 +341,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                             class="justify-self-end text-green-700 border border-green-700 hover:bg-red-700 hover:text-white hover:border-red-700 focus:outline-none rounded-full text-sm p-2 text-center inline-flex items-center"
                         >
                             <svg
-                                class="w-4 h-4 "
+                                class="w-4 h-4"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -367,7 +367,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
         <!-- Small Modal -->
         <template x-if="true">
             <div
-            x-cloak
+                x-cloak
                 x-show="modalIsShown"
                 x-transition
                 tabindex="-1"
@@ -388,7 +388,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                 Ενημέρωση
                             </h3>
                             <button
-                             @click="hideModal = true"
+                                @click="hideModal = true"
                                 type="button"
                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             >
@@ -421,11 +421,11 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                 class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
                             >
                                 Η λιστα με τα φυτά δεν αποθηκεύεται σε κάποια
-                                εξωτερική βάση δεδομένων παρα μόνο στην τοπική μνήμη
-                                του περιηγητή που χρησημοποιείτε. Ως εκ τούτου η
-                                διάγραφή των δεδομένων περιήγησης από το ιστορικό
-                                για τον ιστότοπο μας θα προκαλέσει απώλεια των
-                                αποθηκευμένων φυτών.
+                                εξωτερική βάση δεδομένων παρα μόνο στην τοπική
+                                μνήμη του περιηγητή που χρησημοποιείτε. Ως εκ
+                                τούτου η διάγραφή των δεδομένων περιήγησης από
+                                το ιστορικό για τον ιστότοπο μας θα προκαλέσει
+                                απώλεια των αποθηκευμένων φυτών.
                             </p>
                         </div>
                         <!-- Modal footer -->
@@ -441,8 +441,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                         </div>
                     </div>
                 </div>
+            </div>
         </template>
-        </div>
     </section>
 </MainLayout>
-
