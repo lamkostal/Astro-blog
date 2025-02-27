@@ -209,7 +209,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                     <div class="li-container mb-5">
                         <div class="bg-container bg-gray-200">
                             <div 
-                            class="" :class="plant.isDry ?'red-trail':'emerald-trail'">
+                            class="blur-[22px]" :class="plant.isDry ?'red-trail':'emerald-trail'">
                               </div>
                          </div>
                         <li
@@ -470,38 +470,28 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
 
       }
          .emerald-trail{
-         width: 400px;
-  aspect-ratio: 20 / 1;
+            width: 150px;
+            aspect-ratio: 1 / 1;
   position: absolute;
-  background: linear-gradient(
-  90deg,
-  transparent 40%,
-    #38b576,
-    transparent 100%
-  );
+  background: radial-gradient(circle, rgba(4,120,87,1) 0%, rgba(4,120,87,1) 10%, rgba(4,120,87,0) 85%, rgba(4,120,87,0) 100%);
   offset-path: border-box;
   offset-anchor: 100% 50%;
-  animation: trailing 50s infinite linear;
+  animation: trailing 30s infinite linear;
          }
          .red-trail{
-         width: 400px;
-  aspect-ratio: 20 / 1;
+         width: 150px;
+  aspect-ratio: 1 / 1;
   position: absolute;
-  background: linear-gradient(
-  90deg,
-  transparent 40%,
-    #be2a19,
-    transparent 100%
-  );
+  background: radial-gradient(circle, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 10%, rgba(255,0,0,0) 85%, rgba(255,0,0,0) 100%);
   offset-path: border-box;
   offset-anchor: 100% 50%;
-  animation: trailing 40s infinite linear;
+  animation: trailing 10s infinite linear;
          }
   
     .custom-li{
   background: linear-gradient(#ffffff 40%, #dfe3e9) padding-box transparent;
   padding: 1rem 1.5rem;
-  border: 3px double transparent;
+  border: 3px solid transparent;
   border-radius: 20px;
   
     }
