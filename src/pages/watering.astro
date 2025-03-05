@@ -25,6 +25,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     date:'',
     days:undefined,
     freq:'',
+    
     plants:[],
     today:new Date,
     get dryPlants(){
@@ -41,6 +42,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
          this.plants[index].days = Math.floor((utc1 - utc2) / _MS_PER_DAY);
          this.checkIsDry(index)
     },
+    
     addItems(){
              if( this.title !=='' && this.date !== '' ){
              this.hideModal=false
@@ -62,6 +64,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
             this.plants[index].isDry = true
            
         } else { this.plants[index].isDry = false}
+        
     },
   
     saveData(){
@@ -80,7 +83,6 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
           if(localStorage.getItem('modalIsOff')){
           this.neverShowModal = JSON.parse(localStorage.getItem('modalIsOff'))
           }
-          
     },
     modalIsShown(){
       if(this.hideModal === false && this.neverShowModal === false){
@@ -213,10 +215,11 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                               </div>
                          </div>
                         <li
-                            class="grid auto-rows-max md:grid-cols-5 gap-2 md:grid-rows-1 grid-cols-1 grid-rows-2 place-items-center gap-2      
+                            class="grid  md:grid-cols-[repeat(5,_minmax(0,1fr))_0.5fr] gap-2 md:grid-rows-1 grid-cols-[1fr] grid-rows-[0.5fr_repeat(3,_1fr)_0.5fr] place-items-center gap-2      
                             custom-li "
                             x-init="$nextTick(()=>{
-                            itemdateDiff(index)
+                              itemdateDiff(index)
+                               nextWaterDay(index)
                             })"
                         >
                             <!-- title -->
@@ -256,7 +259,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                     </svg>
                                 </template>
                                 <span
-                                    class="text-md font-bold capitalize break-all"
+                                    class="text-md font-bold capitalize break-words"
                                     x-text="plant.title"></span>
                             </div>
     
@@ -319,29 +322,81 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                 <span class="sr-only">Πότισα!</span>
                             </button>
                             <!-- last watered -->
-                            <div class="flex flex-col items-center text-center">
-                                <span class="text-sm"
+                             
+                            <div class="flex flex-col items-center text-center ">
+                                <div class="mb-2">
+                          <!-- droplets -->
+                                    <template x-if="Math.ceil(((plant.freq-plant.days)/plant.freq)*4)>0" x-for="i in Math.ceil(((plant.freq-plant.days)/plant.freq)*4)" >
+                                        
+                                        <svg class="w-5 h-5 inline" fill="oklch(0.588 0.158 241.966)" xml:space="preserve" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" clip-rule="evenodd" viewBox="0 0 253 400"><path fill-rule="nonzero" d="M126.316 0c21.053 94.737 126.316 178.947 126.316 263.158 0 84.21-73.684 136.842-126.316 136.842C73.684 400 0 347.368 0 263.158 0 178.947 105.263 94.737 126.316 0Zm63.158 168.421s31.579 52.632 15.789 165.79c68.421-81.579-15.789-165.79-15.789-165.79Z"/></svg>
+                                        
+                                    </template>
+                                    <template x-if="plant.freq-plant.days<=0">
+                                     <div>
+                                            <svg
+                                            class="w-6 h-6 text-gray-800 inline"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            fill="red"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                           
+                                            <svg class="w-6 h-6 inline"   xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 512 512"><path  d="M424 110c-34 0-64 19-79 49a10 10 0 1 0 18 9 68 68 0 1 1 68 97v-65c0-6-4-10-10-10H197l-93-88c10-22 4-49-13-67-4-4-11-4-15 0L3 109c-4 4-4 10 0 14 18 18 44 23 67 14l113 120v213c0 5 4 10 10 10h228c6 0 10-5 10-10V286a88 88 0 0 0-7-176zm-13 128H297a10 10 0 1 0 0 21h114v200H203V253c0-3-1-5-3-7L79 118c-3-4-8-5-12-2-13 7-29 6-41-1l57-57c7 12 8 28 0 42-2 4-1 9 2 12l101 95c2 2 4 3 7 3h218v28z"/><path  d="M256 238h-20a10 10 0 1 0 0 21h20a10 10 0 1 0 0-21z"/></svg>
+                                     </div>
+                                    </template>
+                                </div>
+                                <span class="text-xs"
                                     >τελευταίο πότισμα
-                                    <template x-if="plant.days > 0 ">
+                                    <!-- <template x-if="plant.days > 0 ">
                                         <span
                                             class="font-bold"
                                             :class="plant.isDry ? 'text-red-500' : 'text-emerald-500'"
                                             x-text="' πριν: '+ plant.days+ ' ημέρες'"
                                         ></span>
-                                    </template>
-                                    <template x-if="plant.days===0">
+                                    </template> -->
+                                    <!-- <template x-if="plant.days===0">
                                         <span
                                             class="font-bold"
                                             :class="plant.isDry ? 'text-red-500' : 'text-emerald-500'"
                                             >Σήμερα</span
                                         >
-                                    </template>
+                                    </template> -->
                                 </span>
                                 <span
-                                    class="text-sm text-gray-400 mt-1"
+                                    class="text-sm text-gray-400 "
                                     x-text="plant.date"></span>
+                              
                             </div>
-    
+                            <div class=" flex flex-col items-center justify-center text-sm">
+                               <span>επόμενο πότισμα</span>
+                             <template x-if="plant.freq-plant.days>1">
+                                                <span class="text-md font-bold text-emerald-600" x-text="plant.freq-plant.days + ' ημέρες'"></span>
+                             </template>
+                              
+                                <template x-if="plant.freq-plant.days===0">
+                                    
+                                    <span class="text-lg font-bold text-red-400" >Σήμερα!</span>
+                                    
+                                </template> 
+                                <template x-if="plant.freq-plant.days===1">
+                                    
+                                    <span class="text-lg font-bold text-orange-400" >Αύριο</span>
+                                    
+                                </template> 
+                                 <template x-if="plant.freq-plant.days<0">
+                                  
+                                    <span class="text-md font-bold text-red-500" x-text="Math.abs(plant.freq-plant.days) +' days late!'"></span>
+                                    
+                                </template>
+
+                            </div>
                             <!-- remove button -->
                             <button
                                 @click="removeItem(index)"
@@ -456,11 +511,10 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
 </MainLayout>
 <style>
       .li-container{
-       
         position: relative;
-  z-index: 20;
-  overflow: hidden;
-  border-radius: 20px;
+        z-index: 20;
+         overflow: hidden;
+         border-radius: 20px;
       }
       .bg-container{
         position: absolute;
