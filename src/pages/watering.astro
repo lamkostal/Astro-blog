@@ -46,7 +46,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     addItems(){
              if( this.title !=='' && this.date !== '' ){
              this.hideModal=false
-             this.plants.push({title:this.title, date:this.formatDate, days:this.days, freq:this.freq, isDry:this.isDry})
+             this.plants.unshift({title:this.title, date:this.formatDate, days:this.days, freq:this.freq, isDry:this.isDry})
              this.title =''
              this.date = null
              }  
