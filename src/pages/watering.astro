@@ -215,11 +215,13 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                               </div>
                          </div>
                         <li
-                            class="grid  md:grid-cols-[repeat(5,_minmax(0,1fr))_0.5fr] gap-2 md:grid-rows-1 grid-cols-[1fr] grid-rows-[0.5fr_repeat(3,_1fr)_0.5fr] place-items-center gap-2      
+                            class="grid  md:grid-cols-[repeat(5,_minmax(0,1fr))_0.4fr] gap-2 md:grid-rows-1 
+                            grid-cols-1 grid-rows-[0.8fr_0.5fr_0.5fr__1fr_0.1fr] place-items-center 
+                            md:px-4 md:py-5  px-2 py-3 
                             custom-li "
                             x-init="$nextTick(()=>{
                               itemdateDiff(index)
-                               nextWaterDay(index)
+                              
                             })"
                         >
                             <!-- title -->
@@ -259,12 +261,12 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                     </svg>
                                 </template>
                                 <span
-                                    class="text-md font-bold capitalize break-words"
+                                    class="text-lg md:text-md font-bold capitalize break-words"
                                     x-text="plant.title"></span>
                             </div>
     
                             <!-- water freq -->
-                            <div class="w-full flex flex-col items-center relative">
+                            <div class=" md:w-full flex md:flex-col flex-row justify-center gap-2 items-center relative">
                                 <div class="absolute bottom-2 right-0">
                                     <template x-if="plant.freq ==='' ">
                                         <svg
@@ -289,7 +291,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                 >
                                     ποτίσμα κάθε:
                                 </p>
-                                <div class="w-2/3">
+                                <div class="w-1/3 md:w-full">
                                     <input
                                         @input.debounce="checkIsDry(index)"
                                         x-model="plant.freq"
@@ -305,7 +307,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                             <button
                                 @click="wateredToday(index)"
                                 type="button"
-                                class="text-emerald-700 border border-emerald-700 hover:bg-emerald-700 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"
+                                class=" text-emerald-700 border border-emerald-700 hover:bg-emerald-700 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"
                             >
                                 <span class="px-2">Πότισα!</span>
                                 <svg
@@ -543,8 +545,8 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
          }
   
     .custom-li{
-  background: linear-gradient(#ffffff 40%, #dfe3e9) padding-box transparent;
-  padding: 1rem 1.5rem;
+  background: linear-gradient(#ffffffef 50%, #dfe3e9) padding-box transparent;
+  
   border: 3px solid transparent;
   border-radius: 20px;
   
