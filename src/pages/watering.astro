@@ -133,7 +133,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                         class="block mb-1 md:mb-2 text-sm font-medium text-gray-900"
                         >Τελευταίο Πότισμα</label
                     >
-                    <div class="relative max-w-sm">
+                    <div class="relative ">
                         <div
                             class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
                         >
@@ -171,7 +171,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                     title="Πρόσθεσε φυτό"
                     type="submit"
                     @click.prevent="addItems"
-                    class="focus:outline-none text-white bg-emerald-700 hover:bg-emerald-800 text-lg font-bold rounded-lg px-5 py-2.5 flex justify-center"
+                    class="focus:outline-none text-white bg-emerald-500 hover:bg-emerald-800 text-lg font-bold rounded-lg px-5 py-2.5 flex justify-center"
                 >
                     <svg
                         class="w-6 h-6 text-white"
@@ -199,7 +199,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                         x-show="plants.length > 0"
                         class="text-center text-2xl  pl-4 border-l-4"
                     >
-                        Τα Φυτά Μου
+                        Τα Φυτά Μου <span class="text-base">(<span x-text="plants.length"></span>)</span>
                     </h2>
                     <span x-show="dryPlants.length > 0" class="text-red-600 text-xs underline underline-offset-8"
                         > ( <span x-text="dryPlants.length"
@@ -261,7 +261,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                     </svg>
                                 </template>
                                 <span
-                                    class="text-lg md:text-md font-bold capitalize break-words"
+                                    class="text-lg md:text-base font-bold capitalize break-words"
                                     x-text="plant.title"></span>
                             </div>
     
@@ -379,7 +379,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                             <div class=" flex flex-col items-center justify-center text-sm">
                                <span>επόμενο πότισμα</span>
                              <template x-if="plant.freq-plant.days>1">
-                                                <span class="text-md font-bold text-emerald-600" x-text="plant.freq-plant.days + ' ημέρες'"></span>
+                                                <span class="text-base font-bold text-emerald-600" x-text="plant.freq-plant.days + ' ημέρες'"></span>
                              </template>
                               
                                 <template x-if="plant.freq-plant.days===0">
@@ -394,7 +394,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                 </template> 
                                  <template x-if="plant.freq-plant.days<0">
                                   
-                                    <span class="text-md font-bold text-red-500" x-text="Math.abs(plant.freq-plant.days) +' days late!'"></span>
+                                    <span class="text-base font-bold text-red-500" x-text="Math.abs(plant.freq-plant.days) +' days late!'"></span>
                                     
                                 </template>
 
@@ -546,8 +546,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
   
     .custom-li{
   background: linear-gradient(#ffffffef 50%, #dfe3e9) padding-box transparent;
-  
-  border: 3px solid transparent;
+  border: 2px solid transparent;
   border-radius: 20px;
   
     }
