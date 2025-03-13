@@ -197,7 +197,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                 <div class="flex justify-between items-center mb-5">
                     <h2
                         x-show="plants.length > 0"
-                        class="text-center text-2xl  pl-4 border-l-4"
+                        class="text-center text-2xl pl-1 md:pl-4 border-l-4"
                     >
                         Τα Φυτά Μου <span class="text-base">(<span x-text="plants.length"></span>)</span>
                     </h2>
@@ -214,6 +214,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                             class="blur-[22px]" :class="plant.isDry ?'red-trail':'emerald-trail'">
                               </div>
                          </div>
+         <!-- list item -->
                         <li
                             class="grid  md:grid-cols-[repeat(5,_minmax(0,1fr))_0.4fr] gap-2 md:grid-rows-1 
                             grid-cols-1 grid-rows-[0.8fr_0.5fr_0.5fr__1fr_0.1fr] place-items-center 
