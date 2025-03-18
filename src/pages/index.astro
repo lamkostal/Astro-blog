@@ -39,7 +39,7 @@ b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
       </div>
       <!-- Main Grid -->
       <h2 class="container max-w-screen-xl mx-auto mt-10 px-8 font-semibold xl:text-2xl">Πιο πρόσφατα άρθρα</h2>
-      <div class="container mx-auto max-w-screen-xl  px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="container mx-auto max-w-screen-xl  px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
        
         {allBlogArticles.slice(0,HOMEPAGE_ARTICLE_LIMIT).map(article=>(
           <ArticleCard article={article}/>
