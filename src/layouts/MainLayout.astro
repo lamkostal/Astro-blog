@@ -4,7 +4,7 @@ import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../constants";
 import Posthog from "../components/posthog.astro";
 
-const { title = "Φυτά Εντός" } = Astro.props;
+const { title = "Δημιουργώντας χώρους διαβίωσης με φυτά εσωτερικού χώρου" } = Astro.props;
 
 interface Props {
   title?: string;
@@ -34,7 +34,7 @@ interface Props {
       ></script>
     <title>{SITE_TITLE} - {title}</title>
   </head>
-  <body class="font-[inter]">
+  <body class="font-[inter] bg-gray-100">
     <!-- cookie --><!-- Cookie Consent by TermsFeed https://www.TermsFeed.com -->
   <script
   type="text/javascript"

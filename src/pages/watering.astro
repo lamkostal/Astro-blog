@@ -18,6 +18,11 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
         x-init="$nextTick(()=> loadData())"
         class="container mx-auto max-w-screen-xl mt-10 px-3 md:px-8"
         x-data=" { 
+    temperature:'',
+    weatherConditionIcon:'',
+    weatherConditionText:'',
+    location:'',
+    alert:'',
     hideModal:true,
     neverShowModal:false,
     isDry:true,
@@ -25,7 +30,6 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     date:'',
     days:undefined,
     freq:'',
-    
     plants:[],
     today:new Date,
     get dryPlants(){
@@ -88,7 +92,20 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
       if(this.hideModal === false && this.neverShowModal === false){
       return true
       }
+    },
+    getWeather() {
+    let response =  fetch('https://api.weatherapi.com/v1/forecast.json?key=24332d362db2453ab09102256252003&q=auto:ip&days=14&aqi=no&alerts=yes').then((response) => response.json()).then( data => {
+    this.temperature = data.current.temp_c
+    this.weatherConditionIcon = data.current.condition.icon
+    this.weatherConditionText = data.current.condition.text
+    this.location = data.location.region
+    if ( data.alerts.alert[0] ){
+        this.alert = data.alerts.alert[0].event
     }
+    })    
+},
+   
+
      }"
     >
         <!-- form and and added plants layout -->
@@ -97,6 +114,15 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
             class="mx-auto max-w-screen-md min-h-screen flex flex-col items-center text-gray-900"
             x-init="$watch('plants',()=>{saveData()})"
         >
+        <section id="weather section" class="self-end flex items-center gap-2 ">
+            <span x-text="alert" class="text-sm text-red-600"></span>
+           <div class="gap-1 border bg-white rounded-full w-fit px-4 flex items-center">
+                <img  class="h-12 w-12" :src="weatherConditionIcon" :alt="weatherConditionText+' skies'">
+                <span x-init="$nextTick( () => getWeather() )" x-text="temperature + ' °C'" class="text-base font-bold"></span>
+           </div>
+            
+        </section>
+
             <header class="pb-4 text-center border-b border-gray-200 md:mb-4">
                 <h1 class="text-2xl font-bold pb-2 capitalize ">
                     Ημερολόγιο ποτίσματος

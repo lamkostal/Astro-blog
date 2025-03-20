@@ -1,58 +1,76 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro'
-import SearchForm from '../components/SearchForm.astro'
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content'; 
-import ArticleCard from '../components/ArticleCard.astro';
-import { HOMEPAGE_ARTICLE_LIMIT } from '../constants';
+import MainLayout from "../layouts/MainLayout.astro";
+import SearchForm from "../components/SearchForm.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import ArticleCard from "../components/ArticleCard.astro";
+import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
 
-
-
-const allBlogArticles : CollectionEntry<'blog'>[] = (await getCollection('blog'))
-.sort((a:CollectionEntry<'blog'>,b: CollectionEntry<'blog'>)=>
-b.data.pubDate.valueOf() - a.data.pubDate.valueOf() 
-)
-
-
+const allBlogArticles: CollectionEntry<"blog">[] = (
+  await getCollection("blog")
+).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
-<link rel="preload" as="image"  imagesrcset="/images/hero-sm.webp 500w, /images/hero-md.webp 1920w" sizes="50vw" >
+<link
+  rel="preload"
+  as="image"
+  imagesrcset="/images/hero-sm.webp 500w, /images/hero-md.webp 1920w"
+  sizes="50vw"
+/>
 <MainLayout>
+  <!-- Top Grid -->
+  <div
+    class="relative grid grid-cols-1 md:grid-cols-2 overflow-hidden
+ min-h-[38rem]"
+  >
+    <div class="order-2"></div>
+    <div
+      class="order-1 md:order-2 px-8 md:px-16 pt-20 text-white bg-gray-500 bg-opacity-25 backdrop-blur-sm md:backdrop-blur-md z-50"
+    >
+      <h1 class="text-2xl font-bold mb-8 leading-tight xl:text-4xl">
+        Δημιουργώντας χώρους διαβίωσης με φυτά εσωτερικού χώρου
+      </h1>
+      <h2 class="text-lg mt-1 mb-8 leading-tight xl:text-xl">
+        Ανακαλύψτε τον ζωντανό κόσμο των φυτών εσωτερικού χώρου. Φέρτε τη φύση
+        στο εσωτερικό και μεταμορφώστε το χώρο σας με πλούσια βλάστηση.
+      </h2>
 
-
-      <!-- Top Grid -->
-      <div class="relative grid  grid-cols-1 md:grid-cols-2  overflow-hidden
- min-h-[38rem]" >
- <div class="order-2"></div>
- <div class="order-1 md:order-2 px-8 md:px-16 pt-20 text-white bg-gray-500 bg-opacity-25 backdrop-blur-sm md:backdrop-blur-md z-50 ">
-  <h1 class="text-2xl font-bold  mb-8 leading-tight xl:text-4xl">
-    Δημιουργώντας χώρους διαβίωσης με φυτά εσωτερικού χώρου
-  </h1>
-  <h2 class="text-lg mt-1 mb-8 leading-tight xl:text-xl" >
-    Ανακαλύψτε τον ζωντανό κόσμο των φυτών εσωτερικού χώρου. Φέρτε τη φύση στο εσωτερικό και μεταμορφώστε το χώρο σας με πλούσια βλάστηση.
-  </h2>
-
-  <SearchForm />
-</div>
-       
-     <img loading="eager" decoding="async" class="absolute object-cover top-0 h-full w-full"  srcset="/images/hero-sm.webp 500w, /images/hero-md.webp 1920w" sizes="50vw"  alt="hero image">
-      </div>
-      <!-- Main Grid -->
-      <h2 class="container max-w-screen-xl mx-auto mt-10 px-8 font-semibold xl:text-2xl">Πιο πρόσφατα άρθρα</h2>
-      <div class="container mx-auto max-w-screen-xl  px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-       
-        {allBlogArticles.slice(0,HOMEPAGE_ARTICLE_LIMIT).map(article=>(
-          <ArticleCard article={article}/>
-        ))}
-      </div>
-      <div class="container max-w-screen-xl mx-auto mt-10 px-8"><a href="/articles" class="inline-block bg-gray-100 p-2 mb-6 hover:bg-emerald-500 hover:text-white">Όλα τα Άρθρα..</a></div>
+      <SearchForm />
     </div>
-   
 
-  </MainLayout>
+    <img
+      loading="eager"
+      decoding="async"
+      class="absolute object-cover top-0 h-full w-full"
+      srcset="/images/hero-sm.webp 500w, /images/hero-md.webp 1920w"
+      sizes="50vw"
+      alt="hero image"
+    />
+  </div>
+  <!-- Main Grid -->
+  <h2
+    class="container max-w-screen-xl mx-auto mt-10 px-8 font-semibold xl:text-2xl"
+  >
+    Πιο πρόσφατα άρθρα
+  </h2>
+  <div
+    class="container mx-auto max-w-screen-xl px-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+  >
+    {
+      allBlogArticles
+        .slice(0, HOMEPAGE_ARTICLE_LIMIT)
+        .map((article) => <ArticleCard article={article} />)
+    }
+  </div>
+  <div class="container max-w-screen-xl mx-auto mt-10 px-8">
+    <a
+      href="/articles"
+      class="inline-block bg-gray-100 p-2 mb-6 hover:bg-emerald-500 hover:text-white"
+      >Όλα τα Άρθρα..</a>
+  </div>
+</MainLayout>
 
-    <script>
-      
-
-      
-    </script>
+<script></script>
