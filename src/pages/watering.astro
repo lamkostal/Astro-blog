@@ -16,7 +16,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
 <MainLayout>
     <section
         x-init="$nextTick(()=> loadData())"
-        class="container mx-auto max-w-screen-xl mt-10 px-3 md:px-8"
+        class="container mx-auto max-w-screen-xl mt-4 md:mt-8 px-3 md:px-8"
         x-data=" { 
     temperature:'',
     weatherConditionIcon:'',
@@ -94,7 +94,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
       }
     },
     getWeather() {
-    let response =  fetch('https://api.weatherapi.com/v1/forecast.json?key=24332d362db2453ab09102256252003&q=auto:ip&days=14&aqi=no&alerts=yes').then((response) => response.json()).then( data => {
+    let response =  fetch('https://api.weatherapi.com/v1/forecast.json?key=24332d362db2453ab09102256252003&q=auto:ip&days=14&aqi=no&alerts=yes&lang=el').then((response) => response.json()).then( data => {
     this.temperature = data.current.temp_c
     this.weatherConditionIcon = data.current.condition.icon
     this.weatherConditionText = data.current.condition.text
@@ -114,8 +114,10 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
             class="mx-auto max-w-screen-md min-h-screen flex flex-col items-center text-gray-900"
             x-init="$watch('plants',()=>{saveData()})"
         >
-        <section id="weather section" class="self-end flex items-center gap-2 ">
+        <section id="weather section" class="self-center md:self-end flex items-center gap-2 mb-4">
             <span x-text="alert" class="text-sm text-red-600"></span>
+            <!-- <span x-text="location" class="text-sm text-red-600"></span> -->
+
            <div class="gap-1 border bg-white rounded-full w-fit px-4 flex items-center">
                 <img  class="h-12 w-12" :src="weatherConditionIcon" :alt="weatherConditionText+' skies'">
                 <span x-init="$nextTick( () => getWeather() )" x-text="temperature + ' °C'" class="text-base font-bold"></span>
