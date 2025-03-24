@@ -114,7 +114,7 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
             class="mx-auto max-w-screen-md min-h-screen flex flex-col items-center text-gray-900"
             x-init="$watch('plants',()=>{saveData()})"
         >
-        <section id="weather section" class="self-center md:self-end flex items-center gap-2 mb-4">
+        <section id="weather section" class="self-center md:self-end flex items-center gap-2 mb-4" x-show="temperature">
             <span x-text="alert" class="text-sm text-red-600"></span>
             <!-- <span x-text="location" class="text-sm text-red-600"></span> -->
 
