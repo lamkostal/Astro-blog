@@ -1,5 +1,5 @@
 ---
-title: 'Κινέζικη φυλλοβόλος - Chinese Money Plant'
+title: 'Πιλέα - Chinese Money Plant'
 image: 'chinese money plant.webp'
 pubDate: 2025-02-03
 tags: ['εύκολη φροντίδα', 'χαμηλού φωτισμού']
