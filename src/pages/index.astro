@@ -18,7 +18,8 @@ const allBlogArticles: CollectionEntry<"blog">[] = (
   rel="preload"
   as="image"
   imagesrcset="/images/hero-sm.webp 500w, /images/hero-md.webp 1920w"
-  sizes="50vw"
+  imagesizes="(max-width: 768px) 100vw, 50vw"
+  type="image/webp"
 />
 <MainLayout>
   <!-- Top Grid -->
