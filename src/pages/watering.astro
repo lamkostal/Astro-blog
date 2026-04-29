@@ -267,14 +267,31 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                             </button>
                             <!-- last watered -->
                              
-                            <div class="flex flex-col items-center text-center ">
-                                <div class="mb-2">
+                            <div class="flex flex-col items-center text-center relative ">
+                                <div class="dates-list flex-col border-emerald-700 " x-show="openDatesIndex===index" x-cloak  @click.away="openDatesIndex = null" :id="'dates-list-'+index" :aria-hidden="openDatesIndex===index ? 'false' : 'true'">
+                                    <p>
+                                         πότισα:</p>
+                                                    <ul>
+                                                        <template x-if="plant.history && plant.history.length">
+
+                                                            <template x-for="(d,i) in plant.history.slice(0,3)" :key="i">
+                                                                <li :class="i===0 ? 'most-recent' : ''" x-text="new Date(d).toLocaleDateString('el-GR')"></li>
+                                                            </template>
+                                                        </template>
+                                                        <template x-if="!plant.history || plant.history.length===0">
+                                                            <li class="text-gray-500" x-text="plant.date"></li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                <div class="mb-2 relative">
+                                    
                           <!-- droplets -->
                                     <template x-if="Math.ceil(((plant.freq-plant.days)/plant.freq)*4)>0" x-for="i in Math.ceil(((plant.freq-plant.days)/plant.freq)*4)" >
                                         
                                         <svg class="w-4 h-4 inline" fill="oklch(0.588 0.158 241.966)" xml:space="preserve" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" clip-rule="evenodd" viewBox="0 0 253 400"><path fill-rule="nonzero" d="M126.316 0c21.053 94.737 126.316 178.947 126.316 263.158 0 84.21-73.684 136.842-126.316 136.842C73.684 400 0 347.368 0 263.158 0 178.947 105.263 94.737 126.316 0Zm63.158 168.421s31.579 52.632 15.789 165.79c68.421-81.579-15.789-165.79-15.789-165.79Z"/></svg>
                                         
                                     </template>
+                                    
                                     <template x-if="plant.freq-plant.days<=0">
                                      <div>
                                             <svg
@@ -296,26 +313,19 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
                                      </div>
                                     </template>
                                 </div>
-                                <span class="text-xs"
-                                    >τελευταίο πότισμα
-                                    <!-- <template x-if="plant.days > 0 ">
-                                        <span
-                                            class="font-bold"
-                                            :class="plant.isDry ? 'text-red-500' : 'text-emerald-500'"
-                                            x-text="' πριν: '+ plant.days+ ' ημέρες'"
-                                        ></span>
-                                    </template> -->
-                                    <!-- <template x-if="plant.days===0">
-                                        <span
-                                            class="font-bold"
-                                            :class="plant.isDry ? 'text-red-500' : 'text-emerald-500'"
-                                            >Σήμερα</span
-                                        >
-                                    </template> -->
-                                </span>
-                                <span
-                                    class="text-sm text-gray-400 "
-                                    x-text="plant.date"></span>
+                                <button
+                                    @click.stop="toggleOpenDates(index)"
+                                    type="button"
+                                    class="text-xs text-gray-500 hover:text-gray-700 focus:outline-none"
+                                    :aria-expanded="openDatesIndex===index"
+                                    :aria-controls="'dates-list-'+index"
+                                    title="Προβολή ημερομηνιών"
+                                >
+                                    <svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" />
+                                    </svg>
+                                    <span class="sr-only">Προβολή ημερομηνιών</span>
+                                </button>
                               
                             </div>
                             <div class=" flex flex-col items-center justify-center text-sm">
@@ -367,8 +377,9 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     
                                 <span class="sr-only">διαγραφή!</span>
                             </button>
-                        </li>
-                    </div>
+                                                </li>
+                                                
+                                        </div>
                 </template>
             </ul>
         </div>
@@ -454,12 +465,12 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     </section>
 </MainLayout>
 <style>
-      .li-container{
-        position: relative;
-        z-index: 20;
-         overflow: hidden;
-         border-radius: 10px;
-      }
+            .li-container{
+                position: relative;
+                z-index: 20;
+                 overflow: hidden;
+                 border-radius: 10px;
+            }
       .bg-container{
         position: absolute;
   inset: 0;
@@ -497,4 +508,23 @@ import { HOMEPAGE_ARTICLE_LIMIT } from "../constants";
     offset-distance: 100%;
   }
 }
+    /* Dates list placed to the right of the card, sibling to the grid */
+    .dates-list{ 
+           background-color: #fafafa;
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 8px;
+    position: absolute;
+    top: -20%;
+    border: 1px solid rgb(4 120 87 / 1);
+    height: auto;
+    padding: 0.3rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    z-index: 30;
+        }
+    .dates-list ul{ margin:0;  display:flex; flex-direction:column; gap:2px; overflow:hidden; max-height:100%; }
+    .dates-list li, .dates-list p{ font-size:0.75rem; color:#6b7280; line-height:1.1;  }
+    .dates-list li.most-recent{ color:#047857; font-weight:600; margin-top:3px; }
+    @media (max-width:768px){ .dates-list{ position:static; left:auto; transform:none; margin-left:0; width:auto; margin-top:8px; } }
 </style>

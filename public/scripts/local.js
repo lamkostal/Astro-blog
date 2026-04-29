@@ -10,6 +10,7 @@ document.addEventListener('alpine:init', () => {
         isDry:true,
         title:'',
         date:'',
+        openDatesIndex: null,
         days:undefined,
         freq:'',
         plants:[],
@@ -22,28 +23,58 @@ document.addEventListener('alpine:init', () => {
         },
         itemdateDiff(index){
              const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-             const dateobject= new Date(this.plants[index].date)
+             // prefer history[0] (most recent) if available
+             let dateVal = null
+             if(this.plants[index].history && this.plants[index].history.length){
+                 dateVal = new Date(this.plants[index].history[0])
+             } else if (this.plants[index].date){
+                 dateVal = new Date(this.plants[index].date)
+             } else {
+                 dateVal = new Date()
+             }
+             const dateobject = dateVal
              const utc1 = Date.UTC(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
              const utc2 = Date.UTC(dateobject.getFullYear(), dateobject.getMonth(), dateobject.getDate());
              this.plants[index].days = Math.floor((utc1 - utc2) / _MS_PER_DAY);
+            // keep a human-friendly display field for compatibility
+           this.plants[index].date = this.plants[index].history && this.plants[index].history.length ? new Date(this.plants[index].history[0]).toDateString() : this.plants[index].date
              this.checkIsDry(index)
         },
         
         addItems(){
-                 if( this.title !=='' && this.date !== '' ){
-                 this.hideModal=false
-                 this.plants.push({title:this.title, date:this.formatDate, days:this.days, freq:this.freq, isDry:this.isDry})
-                 this.title =''
-                 this.date = null
-                 }  
-                 else {alert('please fill both fields')}   
-                 }, 
+             if( this.title !=='' && this.date !== '' ){
+             this.hideModal=false
+             // convert datepicker value (dd/mm/yyyy) to ISO string
+            const iso = new Date(this.date.split('/').reverse().join('/')).toISOString()
+           this.plants.push({title:this.title, history:[iso], date:new Date(iso).toDateString(), days:this.days, freq:this.freq, isDry:this.isDry})
+             this.title =''
+             this.date = null
+             }  
+             else {alert('please fill both fields')}   
+             }, 
         removeItem(index){
                  this.plants.splice(index,1)
         },
+        toggleOpenDates(index){
+            this.openDatesIndex = this.openDatesIndex === index ? null : index
+        },
         wateredToday(index){
-                this.plants[index].date = this.today.toDateString()
-                this.itemdateDiff(index)       
+            const todayStr = this.today.toDateString()
+            if(!this.plants[index].history) this.plants[index].history = []
+            // if the most recent history entry is already today, don't add a duplicate
+            if(this.plants[index].history.length && new Date(this.plants[index].history[0]).toDateString() === todayStr){
+                // update display and recalc
+                this.plants[index].date = todayStr
+                this.itemdateDiff(index)
+                return
+            }
+            const iso = this.today.toISOString()
+            // add most recent at front
+            this.plants[index].history.unshift(iso)
+            // keep last 10 entries
+            if(this.plants[index].history.length>10) this.plants[index].history.length = 10
+            this.plants[index].date = todayStr
+            this.itemdateDiff(index)
         },
         checkIsDry(index){
             if(this.plants[index].freq && this.plants[index].days >= this.plants[index].freq || this.plants[index].freq==='' ){
@@ -53,9 +84,9 @@ document.addEventListener('alpine:init', () => {
             
         },
       
-        saveData(){
+          saveData(){
               localStorage.setItem('plants',JSON.stringify(this.plants))
-        },
+          },
         saveModalState(){
         this.neverShowModal= true
               localStorage.setItem('modalIsOff',JSON.stringify(this.neverShowModal))  
@@ -64,7 +95,28 @@ document.addEventListener('alpine:init', () => {
         loadData(){
         console.log(this.dryPlants)
             if(localStorage.getItem('plants')){
-             this.plants = JSON.parse(localStorage.getItem('plants'))
+             const raw = JSON.parse(localStorage.getItem('plants'))
+             // migrate legacy items that used `date` to `history`
+             this.plants = raw.map((p)=>{
+                 const item = {...p}
+                 if(!item.history){
+                     if(item.date){
+                         const parsed = new Date(item.date)
+                         if(!isNaN(parsed)){
+                             item.history = [parsed.toISOString()]
+                         } else {
+                             item.history = []
+                         }
+                     } else {
+                         item.history = []
+                     }
+                 }
+                 // ensure history entries are ISO strings
+                 item.history = item.history.map(h => (new Date(h)).toISOString())
+                 // ensure a display-friendly date string is present
+                 item.date = item.history && item.history.length ? new Date(item.history[0]).toDateString() : (item.date||'')
+                 return item
+             })
             }
               if(localStorage.getItem('modalIsOff')){
               this.neverShowModal = JSON.parse(localStorage.getItem('modalIsOff'))
